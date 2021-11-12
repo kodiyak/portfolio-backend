@@ -15,6 +15,7 @@ model Project {
   title String
   slug String
   isPublic Boolean?
+  releasedAt DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
 }

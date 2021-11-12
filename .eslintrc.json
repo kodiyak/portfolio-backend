@@ -16,6 +16,10 @@
     "prettier"
   ],
   "rules": {
+    "no-useless-constructor": "off",
+    "node/no-callback-literal": "off",
+    "no-redeclare": "off",
+    "import/export": "off",
     "prettier/prettier": [
       "error"
     ],
@@ -29,10 +33,7 @@
       "single"
     ],
     "space-before-function-paren": "off",
-    "@typescript-eslint/space-before-function-paren": [
-      "error",
-      "always"
-    ],
+    "@typescript-eslint/space-before-function-paren": "off",
     "no-irregular-whitespace": [
       "error"
     ],
@@ -64,7 +65,13 @@
     ],
     "comma-dangle": [
       "error",
-      "always-multiline"
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
     ],
     "eqeqeq": [
       "error",

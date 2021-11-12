@@ -6,12 +6,14 @@
   "type": "module",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "lint": "eslint . --ext=.ts"
+    "lint": "eslint . --ext=.ts",
+    "migrate": "prisma db push"
   },
   "dependencies": {
     "@prisma/client": "^3.4.2",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "yup": "^0.32.11"
   },
   "prisma": {
     "schema": "./src/infra/database/prisma/schema.prisma"
