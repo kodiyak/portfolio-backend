@@ -1,26 +1,37 @@
-import { Project } from '.prisma/client'
+import { Project } from '../../core/entities/Project'
 import { ProjectRepository } from '../../core/repositories/ProjectsRepository'
 import { prisma } from '../database/prisma/client'
 
 export class ProjectRepositoryPrisma implements ProjectRepository {
   public async create(data: ProjectRepository.Create) {
-    const project = await prisma.project.create({
+    const projectData = await prisma.project.create({
       data: {
         title: data.title,
         slug: data.slug,
         ...data,
       },
     })
-    return project
+
+    return new Project(projectData)
   }
 
   public async find(id: string): Promise<Project | undefined> {
-    const project = await prisma.project.findFirst({ where: { id } })
-    return project
+    const data = await prisma.project.findFirst({ where: { id } })
+    if (!data) {
+      return undefined
+    }
+    return new Project(data)
   }
 
-  public async findBy(field: keyof Project, value: string): Promise<Project | undefined> {
-    const project = await prisma.project.findFirst({ where: { [field]: value } })
-    return project
+  public async findBy(
+    field: keyof import('@prisma/client').Project,
+    value: string
+  ): Promise<Project | undefined> {
+    const data = await prisma.project.findFirst({ where: { [field]: value } })
+    if (!data) {
+      return undefined
+    }
+
+    return new Project(data)
   }
 }

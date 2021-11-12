@@ -18,25 +18,37 @@ export class ExpressAdapter {
         response.json(results)
       } catch (err) {
         if (err instanceof yup.ValidationError) {
-          const errors: any = {}
-          for (const index in err.errors) {
-            const msg = err.errors[index]
-            const inner = err.inner[index]
-            errors[inner.path || ''] = msg
-          }
-          response.status(400).json(errors)
+          const results = ExpressAdapter.getValidationErrors(err)
+          return response.status(400).json(results)
         }
 
         if (err instanceof HttpError) {
           return response.status(err.getCode()).json(err.toJSON())
         }
 
-        response.status(err.code || 500).json({
+        return response.status(err.code || 500).json({
           message: err.message,
           stack: err.stack.split('\n').map((line) => line.trim()),
           code: err.code,
         })
       }
+    }
+  }
+
+  public static getValidationErrors(error: yup.ValidationError) {
+    const errors: Array<{ path: string; message: string }> = []
+    for (const index in error.errors) {
+      const message = error.errors[index]
+      const { path } = error.inner[index]
+      errors.push({
+        message,
+        path,
+      })
+    }
+
+    return {
+      message: 'Validation Error',
+      errors,
     }
   }
 }
