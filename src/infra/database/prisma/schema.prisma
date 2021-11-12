@@ -15,7 +15,17 @@ model Project {
   title String
   slug String
   isPublic Boolean?
+  repositoryUrl String?
+  price Decimal?
   releasedAt DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
+  categories Category[] @relation("_projects_categories")
+}
+
+model Category {
+  id String @id @default(uuid())
+  title String
+  slug String
+  projects Project[] @relation("_projects_categories")
 }

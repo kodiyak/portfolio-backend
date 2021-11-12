@@ -1,9 +1,9 @@
 import { Project } from '../../core/entities/Project'
-import { ProjectRepository } from '../../core/repositories/ProjectsRepository'
+import { ProjectRepository } from '../../core/repositories/ProjectRepository'
 import { prisma } from '../database/prisma/client'
 
 export class ProjectRepositoryPrisma implements ProjectRepository {
-  public async create(data: ProjectRepository.Create) {
+  public async create(data: Partial<Project.Data>) {
     const projectData = await prisma.project.create({
       data: {
         title: data.title,
@@ -23,10 +23,7 @@ export class ProjectRepositoryPrisma implements ProjectRepository {
     return new Project(data)
   }
 
-  public async findBy(
-    field: keyof import('@prisma/client').Project,
-    value: string
-  ): Promise<Project | undefined> {
+  public async findBy(field: keyof Project.Data, value: string): Promise<Project | undefined> {
     const data = await prisma.project.findFirst({ where: { [field]: value } })
     if (!data) {
       return undefined

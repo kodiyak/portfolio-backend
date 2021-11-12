@@ -1,6 +1,6 @@
 import { generateUuid } from '../../../helpers/generateUuid'
 import StrHelper from '../../../helpers/StrHelper'
-import { ProjectRepository } from '../../repositories/ProjectsRepository'
+import { ProjectRepository } from '../../repositories/ProjectRepository'
 
 export class CreateProjectService {
   constructor(protected projectRepository: ProjectRepository) {}
