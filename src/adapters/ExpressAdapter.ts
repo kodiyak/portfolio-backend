@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import * as yup from 'yup'
+import { HttpError } from '../infra/presentations/HttpError'
 
 export class ExpressAdapter {
   public static create<B = any>(
@@ -25,6 +26,11 @@ export class ExpressAdapter {
           }
           response.status(400).json(errors)
         }
+
+        if (err instanceof HttpError) {
+          return response.status(err.getCode()).json(err.toJSON())
+        }
+
         response.status(err.code || 500).json({
           message: err.message,
           stack: err.stack.split('\n').map((line) => line.trim()),
