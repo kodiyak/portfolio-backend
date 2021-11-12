@@ -1,15 +1,21 @@
+import { generateUuid } from '../../../helpers/generateUuid'
+import StrHelper from '../../../helpers/StrHelper'
 import { ProjectRepository } from '../../repositories/ProjectsRepository'
-import { ProjectAlreadyExistsError } from './errors/ProjectAlreadyExistsError'
 
 export class CreateProjectService {
   constructor(protected projectRepository: ProjectRepository) {}
 
   public async handle(data: ProjectRepository.Create) {
-    const project = await this.projectRepository.findBy('slug', data.slug)
-    if (!project) {
-      return this.projectRepository.create(data)
-    }
+    const slug = data.slug || StrHelper.slug(data.title)
+    const project = await this.projectRepository.findBy('slug', slug)
 
-    throw new ProjectAlreadyExistsError(project)
+    if (!project) {
+      return this.projectRepository.create({ ...data, slug })
+    } else {
+      return this.projectRepository.create({
+        ...data,
+        slug: `${slug}-${generateUuid()}`,
+      })
+    }
   }
 }

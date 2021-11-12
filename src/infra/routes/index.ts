@@ -11,7 +11,6 @@ routes.post(
     new CreateProjectController().handle,
     yup.object().shape({
       title: yup.string().required(),
-      slug: yup.string().required(),
     })
   )
 )
