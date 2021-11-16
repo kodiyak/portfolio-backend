@@ -2,6 +2,7 @@ import { generateUuid } from '../../helpers/generateUuid'
 import { ProjectRepository } from '../../contracts/repositories'
 import { Project } from '../../core/entities/Project'
 import { prisma } from '../database/prisma/client'
+import { Category } from '../../core/entities/Category'
 
 export class ProjectRepositoryPrisma implements ProjectRepository {
   public async create(project: Project) {
@@ -12,7 +13,12 @@ export class ProjectRepositoryPrisma implements ProjectRepository {
       project.setAttribute('slug', `${slug}-${generateUuid()}`)
     }
 
-    const data = await prisma.project.create({ data: project.toJSON() })
+    const data = await prisma.project.create({
+      data: {
+        ...project.toJSON(),
+        categories: undefined,
+      },
+    })
     return project.merge(data)
   }
 
@@ -31,5 +37,19 @@ export class ProjectRepositoryPrisma implements ProjectRepository {
     }
 
     return new Project(data)
+  }
+
+  public async addCategories(project: Project, categories: Category[]) {
+    await prisma.project.update({
+      where: { id: project.getAttribute('id') },
+      data: {
+        ...project.toJSON(),
+        categories: {
+          connect: categories.map((category) => ({ id: category.getAttribute('id') })),
+        },
+      },
+    })
+
+    return categories
   }
 }

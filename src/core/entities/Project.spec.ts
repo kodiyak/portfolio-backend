@@ -1,8 +1,11 @@
 import { ProjectRepositoryPrisma } from '../../infra/repositories/ProjectRepositoryPrisma'
+import { Category } from './Category'
 import { Project } from './Project'
 
 describe('Project Tests', () => {
   const project = new Project()
+  const projectRepository = new ProjectRepositoryPrisma()
+
   beforeEach(() => {
     project.setAttribute('title', 'Project Test')
     project.setAttribute('slug', 'project-test')
@@ -16,9 +19,18 @@ describe('Project Tests', () => {
   })
 
   test('Persist a Project', async () => {
-    const repository = new ProjectRepositoryPrisma()
-    await repository.create(project)
+    await projectRepository.create(project)
 
     return expect(project.getAttribute('id')).not.toBeUndefined()
+  })
+
+  test('Add Categories in Project', async () => {
+    await project.addCategories([
+      new Category({ title: '🚀 Open Source' }),
+      new Category({ title: '👨‍💻 In Progress' }),
+      new Category({ title: '🌟 Private' }),
+    ])
+
+    return expect(project.getAttribute('categories').length).toBe(3)
   })
 })

@@ -3,7 +3,7 @@ class StrHelper {
     if (!value) {
       return ''
     }
-    return value
+    value = value
       .toString() // Cast to string
       .toLowerCase() // Convert the string to lowercase letters
       .normalize('NFD') // The normalize() method returns the Unicode Normalization Form of a given string.
@@ -11,6 +11,16 @@ class StrHelper {
       .replace(/\s+/g, '-') // Replace spaces with -
       .replace(/[^\w-]+/g, '') // Remove all non-word chars
       .replace(/--+/g, '-')
+
+    if (value.startsWith('-')) {
+      value = value.slice(1)
+    }
+
+    if (value.endsWith('-')) {
+      value = value.slice(0, -1)
+    }
+
+    return value
   }
 
   public truncate(str?: string, length: number = 10) {

@@ -4,7 +4,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "commonjs",
-    "baseUrl": ".",
     "typeRoots": [
       "node_modules/@types"
     ],

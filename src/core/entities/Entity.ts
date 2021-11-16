@@ -2,6 +2,10 @@ export class Entity<T extends Record<any, any>> {
   public props: T = {} as T
 
   constructor(props?: Partial<T>) {
+    this.setup(props)
+  }
+
+  protected setup(props?: Partial<T>) {
     if (props) {
       this.merge(props)
     }
