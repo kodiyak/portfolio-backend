@@ -1,6 +1,6 @@
-import { ProjectRepository } from '../../../contracts/repositories'
-import { Project } from '../../entities/Project'
-import StrHelper from '../../../helpers/StrHelper'
+import { ProjectRepository } from '../../../../contracts/repositories'
+import { Project } from '../../../entities/Project'
+import StrHelper from '../../../../helpers/StrHelper'
 
 export class CreateProjectService {
   constructor(protected projectRepository: ProjectRepository) {}

@@ -1,7 +1,7 @@
+import { CreateProjectController } from '@core/modules/projects/controllers/CreateProjectController'
+import { ExpressAdapter } from '@infra/adapters/ExpressAdapter'
 import { Router } from 'express'
 import * as yup from 'yup'
-import { ExpressAdapter } from '../../adapters/ExpressAdapter'
-import { CreateProjectController } from '../../controllers/projects/CreateProjectController'
 
 const routes = Router()
 

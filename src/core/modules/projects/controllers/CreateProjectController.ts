@@ -1,6 +1,6 @@
-import { CreateProjectService } from '../../core/services/projects/CreateProjectService'
-import { HttpError } from '../../infra/presentations/HttpError'
-import { ProjectRepositoryPrisma } from '../../infra/repositories/ProjectRepositoryPrisma'
+import { CreateProjectService } from '../services/CreateProjectService'
+import { HttpError } from '../../../http/HttpError'
+import { ProjectRepositoryPrisma } from '../../../../infra/repositories/ProjectRepositoryPrisma'
 
 export class CreateProjectController {
   public async handle(params: any) {

@@ -7,6 +7,24 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "baseUrl": "./src",
+    "paths": {
+      "@modules/*": [
+        "modules/*"
+      ],
+      "@infra/*": [
+        "infra/*"
+      ],
+      "@core/*": [
+        "core/*"
+      ],
+      "@helpers/*": [
+        "helpers/*"
+      ],
+      "@contracts/*": [
+        "contracts/*"
+      ],
+    },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,

@@ -1,12 +1,9 @@
 import { Request, Response } from 'express'
 import * as yup from 'yup'
-import { HttpError } from '../infra/presentations/HttpError'
+import { HttpError } from '../../core/http/HttpError'
 
 export class ExpressAdapter {
-  public static create<B = any>(
-    callback: ExpressAdapter.Callback<B>,
-    schema?: yup.ObjectSchema<any>
-  ) {
+  public static create<B = any>(callback: ExpressAdapter.Callback<B>, schema?: yup.ObjectSchema<any>) {
     return async (request: Request, response: Response) => {
       try {
         const body = { ...request.body, ...request.params }
