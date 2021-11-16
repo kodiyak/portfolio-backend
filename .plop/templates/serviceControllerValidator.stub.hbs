@@ -1,0 +1,10 @@
+import { HttpValidator } from '@core/http/HttpValidator'
+
+export class {{ pascalCase name }}Validator extends HttpValidator {
+  public async validate(data: any) {
+    await this.yup
+      .object()
+      .shape({})
+      .validate(data, { abortEarly: false })
+  }
+}

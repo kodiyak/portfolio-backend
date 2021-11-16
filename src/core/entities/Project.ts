@@ -1,5 +1,5 @@
-import { CategoryRepositoryPrisma } from '../../infra/repositories/CategoryRepositoryPrisma'
-import { ProjectRepositoryPrisma } from '../../infra/repositories/ProjectRepositoryPrisma'
+import { CategoryRepositoryPrisma } from '@infra/repositories/CategoryRepositoryPrisma'
+import { ProjectRepositoryPrisma } from '@infra/repositories/ProjectRepositoryPrisma'
 import { Category } from './Category'
 import { Entity } from './Entity'
 

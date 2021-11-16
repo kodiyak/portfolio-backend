@@ -1,0 +1,18 @@
+import { HttpError } from '@core/http/HttpError'
+import { HttpResponse } from '@core/http/HttpResponse'
+import { {{ pascalCase name }}Service } from '../services/{{ pascalCase name }}Service'
+
+export class {{ pascalCase name }}Controller {
+  public async handle(params: {{ pascalCase name }}Controller.Data) {
+    try {
+      const service = new {{ pascalCase name }}Service()
+      return new HttpResponse().setBody(await service.handle(params)).setCode(200)
+    } catch (err) {
+      throw new HttpError(err.message).setCode(500)
+    }
+  }
+}
+
+export namespace {{ pascalCase name }}Controller {
+  export type Data = any
+}

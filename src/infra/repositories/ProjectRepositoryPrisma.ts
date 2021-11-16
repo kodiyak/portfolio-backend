@@ -1,8 +1,8 @@
-import { generateUuid } from '../../helpers/generateUuid'
-import { ProjectRepository } from '../../contracts/repositories'
-import { Project } from '../../core/entities/Project'
-import { prisma } from '../database/prisma/client'
-import { Category } from '../../core/entities/Category'
+import { ProjectRepository } from '@contracts/repositories'
+import { Category } from '@core/entities/Category'
+import { Project } from '@core/entities/Project'
+import { generateUuid } from '@helpers/generateUuid'
+import { prisma } from '@infra/database/prisma/client'
 
 export class ProjectRepositoryPrisma implements ProjectRepository {
   public async create(project: Project) {

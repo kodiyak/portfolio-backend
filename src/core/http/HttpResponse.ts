@@ -5,6 +5,8 @@ export class HttpResponse {
 
   protected code: number
 
+  protected body: any
+
   public setCode(code: number) {
     this.code = code
     return this
@@ -32,9 +34,18 @@ export class HttpResponse {
     return this.status
   }
 
+  public getBody() {
+    return this.body
+  }
+
+  public setBody(body: any) {
+    this.body = body
+    return this
+  }
+
   private getProps() {
-    const { message, code, status } = this
-    return { message, code, status }
+    const { message, code, status, body } = this
+    return { message, code, status, body }
   }
 
   public toJSON() {

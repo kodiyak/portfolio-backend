@@ -1,8 +1,8 @@
-import { CategoryRepository } from '../../contracts/repositories'
-import { Category } from '../../core/entities/Category'
-import { Project } from '../../core/entities/Project'
-import StrHelper from '../../helpers/StrHelper'
-import { prisma } from '../database/prisma/client'
+import { CategoryRepository } from '@contracts/repositories'
+import { Category } from '@core/entities/Category'
+import { Project } from '@core/entities/Project'
+import StrHelper from '@helpers/StrHelper'
+import { prisma } from '@infra/database/prisma/client'
 
 export class CategoryRepositoryPrisma implements CategoryRepository {
   public async create(category: Category) {

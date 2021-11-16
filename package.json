@@ -9,7 +9,7 @@
     "migrate": "prisma db push",
     "test": "jest",
     "test:watch": "jest --watch",
-    "make:usecase": "plop --plopfile ./.plop/usecase.ts",
+    "make:service": "plop --plopfile ./.plop/service.ts",
     "build": "babel src --extensions \".ts\" --out-dir dist --copy-files"
   },
   "dependencies": {
