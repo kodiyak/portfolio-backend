@@ -1,14 +1,14 @@
+import { ProjectRepository } from '../../contracts/repositories'
 import { Project } from '../../core/entities/Project'
-import { ProjectRepository } from '../../core/repositories/ProjectRepository'
 import { prisma } from '../database/prisma/client'
 
 export class ProjectRepositoryPrisma implements ProjectRepository {
   public async create(data: Partial<Project.Data>) {
     const projectData = await prisma.project.create({
       data: {
+        ...data,
         title: data.title,
         slug: data.slug,
-        ...data,
       },
     })
 
