@@ -1,3 +1,4 @@
+import { ProjectRepositoryPrisma } from '../../infra/repositories/ProjectRepositoryPrisma'
 import { Project } from './Project'
 
 describe('Project Tests', () => {
@@ -12,5 +13,12 @@ describe('Project Tests', () => {
 
   test('Create a Simple Project', () => {
     return expect(project.getAttribute('isPublic')).toBe(false)
+  })
+
+  test('Persist a Project', async () => {
+    const repository = new ProjectRepositoryPrisma()
+    await repository.create(project)
+
+    return expect(project.getAttribute('id')).not.toBeUndefined()
   })
 })

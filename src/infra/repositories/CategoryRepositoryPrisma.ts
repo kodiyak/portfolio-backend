@@ -3,16 +3,12 @@ import { Category } from '../../core/entities/Category'
 import { prisma } from '../database/prisma/client'
 
 export class CategoryRepositoryPrisma implements CategoryRepository {
-  public async create(data: Partial<Category.Data>) {
+  public async create(category: Category) {
     const categoryData = await prisma.category.create({
-      data: {
-        ...data,
-        slug: data.slug,
-        title: data.title,
-      },
+      data: category.toJSON(),
     })
 
-    return new Category(categoryData)
+    return category.merge(categoryData)
   }
 
   public async find(id: string): Promise<Category | undefined> {

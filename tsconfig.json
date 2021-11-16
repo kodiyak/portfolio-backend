@@ -5,7 +5,6 @@
     "emitDecoratorMetadata": true,
     "module": "commonjs",
     "baseUrl": ".",
-    "rootDir": ".",
     "typeRoots": [
       "node_modules/@types"
     ],
